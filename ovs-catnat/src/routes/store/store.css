@@ -1,0 +1,326 @@
+/* =============================================================================
+   Store Portal Styles
+   ============================================================================= */
+
+.store-portal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+/* Header */
+.store-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.header-brand h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.header-divider {
+  color: var(--color-border);
+}
+
+.header-subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.user-name {
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+/* Main Content */
+.store-main {
+  flex: 1;
+  padding: var(--spacing-xl) 0;
+}
+
+/* Status Banner */
+.status-banner {
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.status-covered {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.status-expiring_soon {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.status-not_covered {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.status-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.status-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.status-text {
+  flex: 1;
+}
+
+.status-text p {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.status-banner .badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.info-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+/* Coverage Grid */
+.coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.coverage-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.coverage-highlight {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+.coverage-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.coverage-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.coverage-type {
+  text-transform: capitalize;
+}
+
+/* Documents Grid */
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.document-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.document-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.document-icon {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+.document-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.document-title {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.document-meta {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.document-action {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* Claims Card */
+.claims-card {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 1px solid #fecaca;
+}
+
+.claims-content p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+}
+
+.claims-steps {
+  margin: 0 0 var(--spacing-lg) var(--spacing-lg);
+  color: var(--color-text);
+}
+
+.claims-steps li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.claims-contacts {
+  display: flex;
+  gap: var(--spacing-xl);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid #fecaca;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.contact-item strong {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.contact-item a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.store-footer {
+  background: var(--color-secondary);
+  color: rgba(255, 255, 255, 0.6);
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .status-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .claims-contacts {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+}

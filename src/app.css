@@ -1,0 +1,724 @@
+/* =============================================================================
+   OVS-CatNat Spatial Design System
+   Apple visionOS / Liquid Glass Aesthetic
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. CSS Custom Properties - Spatial Design Tokens
+   ----------------------------------------------------------------------------- */
+:root {
+  /* Brand Colors */
+  --color-primary: #e31837;
+  --color-primary-glow: rgba(227, 24, 55, 0.4);
+  --color-accent: #ff6b6b;
+
+  /* Semantic Colors */
+  --color-success: #34d399;
+  --color-success-glow: rgba(52, 211, 153, 0.3);
+  --color-warning: #fbbf24;
+  --color-warning-glow: rgba(251, 191, 36, 0.3);
+  --color-error: #f87171;
+  --color-error-glow: rgba(248, 113, 113, 0.3);
+  --color-info: #60a5fa;
+  --color-info-glow: rgba(96, 165, 250, 0.3);
+
+  /* Glass Material System */
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-hover: rgba(255, 255, 255, 0.12);
+  --glass-bg-active: rgba(255, 255, 255, 0.06);
+  --glass-bg-elevated: rgba(255, 255, 255, 0.15);
+  --glass-bg-light: rgba(255, 255, 255, 0.85);
+  --glass-bg-light-hover: rgba(255, 255, 255, 0.92);
+
+  /* Specular Highlights (Top Light Source) */
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-border-subtle: rgba(255, 255, 255, 0.08);
+  --glass-border-strong: rgba(255, 255, 255, 0.25);
+  --glass-inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+
+  /* Blur Values */
+  --blur-sm: 12px;
+  --blur-md: 20px;
+  --blur-lg: 32px;
+  --blur-xl: 48px;
+
+  /* Spatial Shadows (Diffuse, Colored) */
+  --shadow-ambient: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-floating: 0 24px 80px rgba(0, 0, 0, 0.35), 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-glow-primary: 0 8px 32px var(--color-primary-glow);
+  --shadow-glow-success: 0 8px 32px var(--color-success-glow);
+
+  /* Typography - San Francisco Style */
+  --font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Spatial Radii */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-2xl: 40px;
+  --radius-full: 9999px;
+
+  /* Spacing Scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Transitions - Physics-based */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}
+
+/* -----------------------------------------------------------------------------
+   2. Base Reset & Global Styles
+   ----------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-system);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  color: white;
+  background: #0a0a0a;
+}
+
+/* Abstract Mesh Gradient Background */
+.spatial-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(227, 24, 55, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 60% 80%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+}
+
+/* Alternative: Animated Mesh */
+.spatial-bg-animated {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.spatial-bg-animated::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -25%;
+  left: -25%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(227, 24, 55, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(52, 211, 153, 0.12) 0%, transparent 40%);
+  animation: meshFloat 20s ease-in-out infinite;
+}
+
+@keyframes meshFloat {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(2%, -2%) rotate(1deg); }
+  66% { transform: translate(-1%, 1%) rotate(-1deg); }
+}
+
+/* -----------------------------------------------------------------------------
+   3. Glass Material Components
+   ----------------------------------------------------------------------------- */
+
+/* Base Glass Card */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-ambient), var(--glass-inner-glow);
+  transition:
+    background var(--duration-normal) var(--ease-out-expo),
+    border-color var(--duration-normal) var(--ease-out-expo),
+    transform var(--duration-normal) var(--ease-out-expo),
+    box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.glass:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
+}
+
+.glass:active {
+  transform: scale(0.98);
+  background: var(--glass-bg-active);
+}
+
+/* Elevated Glass (Modals, Popovers) */
+.glass-elevated {
+  background: var(--glass-bg-elevated);
+  backdrop-filter: blur(var(--blur-xl)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--blur-xl)) saturate(200%);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-floating), var(--glass-inner-glow);
+}
+
+/* Light Glass (For light mode contexts) */
+.glass-light {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-lg)) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
+  color: #1a1a1a;
+}
+
+/* Subtle Glass (For nested elements) */
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+/* -----------------------------------------------------------------------------
+   4. Spatial Buttons
+   ----------------------------------------------------------------------------- */
+.btn-spatial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-system);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: white;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition:
+    all var(--duration-normal) var(--ease-out-expo);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-spatial:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.btn-spatial:active {
+  transform: scale(0.97) translateY(0);
+  background: var(--glass-bg-active);
+}
+
+.btn-spatial:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Primary Button */
+.btn-spatial-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #c41230 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-glow-primary), var(--glass-inner-glow);
+}
+
+.btn-spatial-primary:hover {
+  background: linear-gradient(135deg, #f02040 0%, var(--color-primary) 100%);
+  box-shadow: 0 12px 40px var(--color-primary-glow), var(--glass-inner-glow);
+}
+
+/* Ghost Button */
+.btn-spatial-ghost {
+  background: transparent;
+  border-color: var(--glass-border-subtle);
+}
+
+.btn-spatial-ghost:hover {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+
+/* -----------------------------------------------------------------------------
+   5. Form Elements - Spatial Style
+   ----------------------------------------------------------------------------- */
+.input-spatial {
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-system);
+  font-size: 1rem;
+  font-weight: 400;
+  color: white;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-lg);
+  outline: none;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.input-spatial::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.input-spatial:hover {
+  border-color: var(--glass-border);
+  background: var(--glass-bg-hover);
+}
+
+.input-spatial:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+  background: var(--glass-bg-hover);
+}
+
+.input-spatial-light {
+  color: #1a1a1a;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.input-spatial-light::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.input-spatial-light:focus {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-primary);
+}
+
+/* Form Label */
+.label-spatial {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.label-spatial-light {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* -----------------------------------------------------------------------------
+   6. Badges - Spatial Style
+   ----------------------------------------------------------------------------- */
+.badge-spatial {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+}
+
+.badge-spatial-success {
+  background: rgba(52, 211, 153, 0.2);
+  color: var(--color-success);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.badge-spatial-warning {
+  background: rgba(251, 191, 36, 0.2);
+  color: var(--color-warning);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.badge-spatial-error {
+  background: rgba(248, 113, 113, 0.2);
+  color: var(--color-error);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.badge-spatial-info {
+  background: rgba(96, 165, 250, 0.2);
+  color: var(--color-info);
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+/* -----------------------------------------------------------------------------
+   7. Typography - San Francisco Style
+   ----------------------------------------------------------------------------- */
+.text-display {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.text-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.text-headline {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.text-body {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.text-caption {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.text-overline {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: -0.02em;
+}
+
+/* -----------------------------------------------------------------------------
+   8. Layout Utilities
+   ----------------------------------------------------------------------------- */
+.container-spatial {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-2 { gap: var(--space-2); }
+.stack-3 { gap: var(--space-3); }
+.stack-4 { gap: var(--space-4); }
+.stack-6 { gap: var(--space-6); }
+.stack-8 { gap: var(--space-8); }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.row-2 { gap: var(--space-2); }
+.row-3 { gap: var(--space-3); }
+.row-4 { gap: var(--space-4); }
+.row-6 { gap: var(--space-6); }
+
+/* -----------------------------------------------------------------------------
+   9. Tables - Spatial Style
+   ----------------------------------------------------------------------------- */
+.table-spatial {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-spatial th {
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.table-spatial td {
+  padding: var(--space-4);
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--glass-border-subtle);
+  transition: background var(--duration-fast) var(--ease-out-expo);
+}
+
+.table-spatial tbody tr {
+  transition: background var(--duration-fast) var(--ease-out-expo);
+}
+
+.table-spatial tbody tr:hover {
+  background: var(--glass-bg);
+}
+
+.table-spatial tbody tr:hover td {
+  border-bottom-color: transparent;
+}
+
+/* -----------------------------------------------------------------------------
+   10. Progress Bar - Spatial
+   ----------------------------------------------------------------------------- */
+.progress-spatial {
+  height: 6px;
+  background: var(--glass-bg);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-spatial-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary) 0%, #ff6b6b 100%);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-slow) var(--ease-out-expo);
+}
+
+/* -----------------------------------------------------------------------------
+   11. Loading States
+   ----------------------------------------------------------------------------- */
+.loading-spatial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.loading-spatial::after {
+  content: '';
+  width: 24px;
+  height: 24px;
+  margin-left: var(--space-3);
+  border: 2px solid var(--glass-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* -----------------------------------------------------------------------------
+   12. Scrollbar - Spatial
+   ----------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--glass-border-strong);
+}
+
+/* -----------------------------------------------------------------------------
+   13. Legacy Support (Gradual Migration)
+   ----------------------------------------------------------------------------- */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: white;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.btn:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #c41230 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-glow-primary);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #f02040 0%, var(--color-primary) 100%);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--glass-border);
+}
+
+.btn-outline:hover {
+  background: var(--glass-bg);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
+.badge-success {
+  background: rgba(52, 211, 153, 0.2);
+  color: var(--color-success);
+}
+
+.badge-warning {
+  background: rgba(251, 191, 36, 0.2);
+  color: var(--color-warning);
+}
+
+.badge-error {
+  background: rgba(248, 113, 113, 0.2);
+  color: var(--color-error);
+}
+
+.badge-info {
+  background: rgba(96, 165, 250, 0.2);
+  color: var(--color-info);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  font-size: 1rem;
+  color: white;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-md));
+  border: 1px solid var(--glass-border-subtle);
+  border-radius: var(--radius-lg);
+  outline: none;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group {
+  margin-bottom: var(--space-5);
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th {
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--glass-border-subtle);
+}
+
+.table tbody tr:hover {
+  background: var(--glass-bg);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: rgba(255, 255, 255, 0.6);
+}
