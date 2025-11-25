@@ -39,10 +39,10 @@ const variantStyles = {
     boxShadow: "none",
   },
   primary: {
-    background: "linear-gradient(135deg, var(--color-primary) 0%, #c41230 100%)",
+    background: "linear-gradient(135deg, var(--color-accent) 0%, #e5a800 100%)",
     border: "1px solid rgba(255, 255, 255, 0.2)",
-    color: "white",
-    boxShadow: "0 8px 32px var(--color-primary-glow), inset 0 1px 1px rgba(255, 255, 255, 0.1)",
+    color: "var(--color-primary)",
+    boxShadow: "0 8px 32px var(--color-accent-glow), inset 0 1px 1px rgba(255, 255, 255, 0.1)",
   },
   ghost: {
     background: "transparent",
@@ -111,9 +111,9 @@ export function SpatialButton(props: SpatialButtonProps) {
         base.borderColor = "var(--glass-border-strong)";
       } else if (local.variant === "primary") {
         base.background =
-          "linear-gradient(135deg, #f02040 0%, var(--color-primary) 100%)";
+          "linear-gradient(135deg, #ffc61a 0%, var(--color-accent) 100%)";
         base.boxShadow =
-          "0 12px 40px var(--color-primary-glow), inset 0 1px 1px rgba(255, 255, 255, 0.1)";
+          "0 12px 40px var(--color-accent-glow), inset 0 1px 1px rgba(255, 255, 255, 0.1)";
       }
     }
 

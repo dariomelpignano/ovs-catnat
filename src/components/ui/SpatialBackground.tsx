@@ -12,15 +12,15 @@ interface SpatialBackgroundProps {
 
 const gradientVariants = {
   default: `
-    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(227, 24, 55, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 21, 38, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(251, 186, 7, 0.12) 0%, transparent 50%),
     radial-gradient(ellipse 50% 60% at 60% 80%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
     linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%)
   `,
   warm: `
-    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(251, 146, 60, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(227, 24, 55, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 60% at 60% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(251, 186, 7, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(254, 237, 186, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 60% 80%, rgba(251, 186, 7, 0.1) 0%, transparent 50%),
     linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%)
   `,
   cool: `

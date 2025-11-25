@@ -6,7 +6,7 @@
 import { JSX, splitProps, mergeProps } from "solid-js";
 
 export interface SpatialBadgeProps extends JSX.HTMLAttributes<HTMLSpanElement> {
-  variant?: "success" | "warning" | "error" | "info" | "neutral";
+  variant?: "success" | "warning" | "error" | "info" | "neutral" | "brand";
   size?: "sm" | "md";
 }
 
@@ -35,6 +35,11 @@ const variantStyles = {
     background: "rgba(255, 255, 255, 0.1)",
     color: "rgba(255, 255, 255, 0.7)",
     borderColor: "rgba(255, 255, 255, 0.15)",
+  },
+  brand: {
+    background: "rgba(251, 186, 7, 0.2)",
+    color: "var(--color-accent)",
+    borderColor: "rgba(251, 186, 7, 0.3)",
   },
 };
 

@@ -206,13 +206,13 @@ function Sidebar(props: SidebarProps) {
             width: "40px",
             height: "40px",
             background:
-              "linear-gradient(135deg, var(--color-primary) 0%, #c41230 100%)",
+              "linear-gradient(135deg, var(--color-accent) 0%, #e5a800 100%)",
             "border-radius": "12px",
             display: "flex",
             "align-items": "center",
             "justify-content": "center",
             "font-size": "1.25rem",
-            "box-shadow": "0 4px 16px var(--color-primary-glow)",
+            "box-shadow": "0 4px 16px var(--color-accent-glow)",
           }}
         >
           🛡️
@@ -228,7 +228,7 @@ function Sidebar(props: SidebarProps) {
           >
             OVS CatNat
           </h1>
-          <SpatialBadge variant="error" size="sm">
+          <SpatialBadge variant="brand" size="sm">
             Admin
           </SpatialBadge>
         </div>
@@ -473,7 +473,7 @@ export default function AdminDashboardPage() {
                 icon="🏪"
                 value={dashboard()?.totalStores.toLocaleString("it-IT") ?? "0"}
                 label="Punti Vendita Totali"
-                accentColor="rgba(227, 24, 55, 0.2)"
+                accentColor="rgba(251, 186, 7, 0.2)"
               />
               <StatCard
                 icon="✓"
@@ -529,7 +529,7 @@ export default function AdminDashboardPage() {
                     href="/admin/import"
                     style={{
                       "font-size": "0.8125rem",
-                      color: "var(--color-primary)",
+                      color: "var(--color-accent)",
                       "text-decoration": "none",
                       "font-weight": "500",
                     }}
@@ -688,7 +688,7 @@ export default function AdminDashboardPage() {
                     href="/admin/stores"
                     style={{
                       "font-size": "0.8125rem",
-                      color: "var(--color-primary)",
+                      color: "var(--color-accent)",
                       "text-decoration": "none",
                       "font-weight": "500",
                     }}
@@ -778,7 +778,7 @@ export default function AdminDashboardPage() {
                                   padding: "14px 16px",
                                   "font-family": "var(--font-mono)",
                                   "font-size": "0.75rem",
-                                  color: "var(--color-primary)",
+                                  color: "var(--color-accent)",
                                   "border-bottom": "1px solid var(--glass-border-subtle)",
                                 }}
                               >

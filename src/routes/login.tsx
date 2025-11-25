@@ -68,14 +68,14 @@ export default function Login() {
                 height: "72px",
                 margin: "0 auto 20px",
                 background:
-                  "linear-gradient(135deg, var(--color-primary) 0%, #c41230 100%)",
+                  "linear-gradient(135deg, var(--color-accent) 0%, #e5a800 100%)",
                 "border-radius": "20px",
                 display: "flex",
                 "align-items": "center",
                 "justify-content": "center",
                 "font-size": "2rem",
                 "box-shadow":
-                  "0 8px 32px var(--color-primary-glow), inset 0 1px 1px rgba(255,255,255,0.2)",
+                  "0 8px 32px var(--color-accent-glow), inset 0 1px 1px rgba(255,255,255,0.2)",
               }}
             >
               🛡️
@@ -179,7 +179,7 @@ export default function Login() {
               <a
                 href="mailto:support@mag.it"
                 style={{
-                  color: "var(--color-primary)",
+                  color: "var(--color-accent)",
                   "text-decoration": "none",
                   "font-weight": "500",
                   transition: "opacity 200ms",
