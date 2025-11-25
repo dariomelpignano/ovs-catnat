@@ -56,13 +56,13 @@ function Sidebar(props: SidebarProps) {
             width: "40px",
             height: "40px",
             background:
-              "linear-gradient(135deg, var(--color-primary) 0%, #c41230 100%)",
+              "linear-gradient(135deg, var(--color-accent) 0%, #e5a800 100%)",
             "border-radius": "12px",
             display: "flex",
             "align-items": "center",
             "justify-content": "center",
             "font-size": "1.25rem",
-            "box-shadow": "0 4px 16px var(--color-primary-glow)",
+            "box-shadow": "0 4px 16px var(--color-accent-glow)",
           }}
         >
           🛡️
@@ -78,7 +78,7 @@ function Sidebar(props: SidebarProps) {
           >
             OVS CatNat
           </h1>
-          <SpatialBadge variant="error" size="sm">
+          <SpatialBadge variant="brand" size="sm">
             Admin
           </SpatialBadge>
         </div>
@@ -213,7 +213,7 @@ function DropZone(props: DropZoneProps) {
   const zoneStyle = (): JSX.CSSProperties => ({
     border: `2px dashed ${
       props.isDragging
-        ? "var(--color-primary)"
+        ? "var(--color-accent)"
         : props.selectedFile
           ? "var(--color-success)"
           : isHovered()
@@ -223,7 +223,7 @@ function DropZone(props: DropZoneProps) {
     "border-radius": "var(--radius-xl)",
     padding: "48px",
     background: props.isDragging
-      ? "rgba(227, 24, 55, 0.1)"
+      ? "rgba(251, 186, 7, 0.1)"
       : props.selectedFile
         ? "rgba(52, 211, 153, 0.1)"
         : "var(--glass-bg)",
@@ -369,7 +369,7 @@ function ProgressBar(props: { value: number }) {
           style={{
             height: "100%",
             background:
-              "linear-gradient(90deg, var(--color-primary) 0%, #ff4d6a 100%)",
+              "linear-gradient(90deg, var(--color-accent) 0%, #ffc61a 100%)",
             "border-radius": "var(--radius-full)",
             width: `${props.value}%`,
             transition: "width 300ms cubic-bezier(0.16, 1, 0.3, 1)",
